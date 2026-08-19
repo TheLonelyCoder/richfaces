@@ -27,7 +27,7 @@
     <groupId>org.richfaces.examples</groupId>
     <artifactId>push-demo</artifactId>
     <name>RichFaces Example - Push Demo</name>
-    <version>4.5.18-SNAPSHOT</version>
+    <version>4.5.18-hotfix-CVE-2018-12532</version>
     <packaging>war</packaging>
 
     <description>

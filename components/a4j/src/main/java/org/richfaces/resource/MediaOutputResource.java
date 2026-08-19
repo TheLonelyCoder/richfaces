@@ -61,6 +61,8 @@ public class MediaOutputResource extends AbstractUserResource implements StateHo
     private String fileName;
 
     public void encode(FacesContext facesContext) throws IOException {
+
+        /*
         OutputStream outStream = facesContext.getExternalContext().getResponseOutputStream();
         String expr = contentProducer.getExpressionString();
 
@@ -69,6 +71,9 @@ public class MediaOutputResource extends AbstractUserResource implements StateHo
         }
 
         contentProducer.invoke(facesContext.getELContext(), new Object[] { outStream, userData });
+        */
+
+        return;
     }
 
     public boolean isTransient() {

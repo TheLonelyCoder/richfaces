@@ -27,7 +27,7 @@
     <groupId>org.richfaces</groupId>
     <artifactId>richfaces-build</artifactId>
     <packaging>pom</packaging>
-    <version>4.5.18-SNAPSHOT</version>
+    <version>4.5.18-hotfix-CVE-2018-12532</version>
     <name>RichFaces Build Version Management</name>
 
     <description>
@@ -179,18 +179,18 @@
             <dependency>
                 <groupId>org.richfaces</groupId>
                 <artifactId>richfaces</artifactId>
-                <version>4.5.18-SNAPSHOT</version>
+                <version>4.5.18-hotfix-CVE-2018-12532</version>
             </dependency>
             <dependency>
                 <groupId>org.richfaces</groupId>
                 <artifactId>richfaces-push-depchain</artifactId>
-                <version>4.5.18-SNAPSHOT</version>
+                <version>4.5.18-hotfix-CVE-2018-12532</version>
                 <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.richfaces</groupId>
                 <artifactId>richfaces-push-native-depchain</artifactId>
-                <version>4.5.18-SNAPSHOT</version>
+                <version>4.5.18-hotfix-CVE-2018-12532</version>
                 <type>pom</type>
             </dependency>
             <dependency>
