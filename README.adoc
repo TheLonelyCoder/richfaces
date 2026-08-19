@@ -134,3 +134,162 @@ For a detailed explanation of additional testing configurations and options, ref
 
 These smoke tests are also executed in the https://travis-ci.org/richfaces/richfaces/builds[continuous integration job].
 
+
+
+
+
+== Unofficial Maintenance / Security Fixes
+
+The original RichFaces project is no longer actively maintained. This fork is
+intended to provide limited maintenance for installations that still depend on
+RichFaces and cannot be migrated immediately.
+
+=== CVE-2018-12532
+
+Version `4.5.18-hotfix-CVE-2018-12532` contains a workaround for
+CVE-2018-12532 affecting `MediaOutputResource`.
+
+This version intentionally disables the affected functionality as a short-term
+security workaround. Applications depending on this functionality may therefore
+behave differently.
+
+Further development will continue as `4.5.19-SNAPSHOT`, with the goal of
+providing a proper fix while preserving the original functionality.
+
+=== Building
+
+The project requires Java 8 and Maven.
+
+Due to the age of the project, some dependencies are no longer available from
+the repositories used by the original build configuration. Additional Maven
+repository configuration is therefore required.
+
+Create or extend:
+
+----
+~/.m2/settings.xml
+----
+
+with the following configuration:
+
+[source,xml]
+----
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="
+            http://maven.apache.org/SETTINGS/1.0.0
+            https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <mirrors>
+        <mirror>
+            <id>central-https</id>
+            <mirrorOf>central</mirrorOf>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </mirror>
+    </mirrors>
+
+    <profiles>
+        <profile>
+            <id>richfaces-old-repos</id>
+
+            <repositories>
+                <repository>
+                    <id>jboss-releases</id>
+                    <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+
+                <repository>
+                    <id>jboss-snapshots</id>
+                    <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>jboss-releases-plugins</id>
+                    <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+
+                <pluginRepository>
+                    <id>jboss-snapshots-plugins</id>
+                    <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>richfaces-old-repos</activeProfile>
+    </activeProfiles>
+
+</settings>
+----
+
+The project can then be built with:
+
+[source,bash]
+----
+./build.sh
+----
+
+or directly with Maven:
+
+[source,bash]
+----
+mvn clean install
+----
+
+The resulting artifacts can be found in the respective `target` directories
+and in the local Maven repository.
+
+=== Tests
+
+The regular Maven build and its unit tests can be executed successfully on a
+current Linux environment using Java 8.
+
+The original RichFaces smoke test suite uses WildFly 8.1, Arquillian, Selenium
+2.x and PhantomJS. Parts of this test infrastructure are obsolete and no longer
+work reliably on current systems. In particular, the PhantomJS-based browser
+tests may fail because the browser/driver can no longer be started.
+
+This should be taken into account when evaluating test results.
+
+=== Acknowledgements
+
+RichFaces is the result of many years of work by its original developers and
+contributors.
+
+Many thanks to the RichFaces team and to everyone who contributed code,
+documentation, testing, bug reports and maintenance over the lifetime of the
+project. Without their work, maintaining legacy applications that still depend
+on RichFaces would not be possible.
+
+This fork builds upon their work and is intended to help keep existing
+installations secure while migration to actively maintained technologies is
+being planned.
+
